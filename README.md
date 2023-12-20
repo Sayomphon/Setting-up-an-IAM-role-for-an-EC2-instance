@@ -18,7 +18,7 @@ In this task, you will log in as the Admin user and create an IAM role. The role
 Note: We don’t recommend that you use full-access policies in a production environment. In this exercise, you use these policies as a proof of concept to get your exercise environment up and running quickly. After you create your S3 bucket and DynamoDB table, you can modify this IAM role so that it has more specific and restrictive permissions. You will learn more about this topic later.
 
 ## Setting by terraform
-''' bash
+```hcl
 provider "aws" {
   region = "ap-southeast-1" # replace with your desired region
 }
@@ -52,4 +52,4 @@ resource "aws_iam_role_policy_attachment" "dynamodb_full_access" {
   policy_arn = data.aws_iam_policy.dynamodb_full_access.arn
   role       = aws_iam_role.ec2_s3_dynamodb_role.name
 }
-'''
+```
