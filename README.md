@@ -23,7 +23,34 @@ Note: We don’t recommend that you use full-access policies in a production env
 provider "aws" {
   region = "ap-southeast-1" # replace with your desired region
 }
-
 ```
   - **Purpose**: This block specifies the cloud service provider, which in this case is AWS.
   - **region**: Defines the AWS region where the resources will be created. You can change this to any valid AWS region based on your requirements.
+### 2. IAM Role Resource
+```hcl
+resource "aws_iam_role" "s3_dynamodb_role" {
+  name = "S3DynamoDBFullAccessRole"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      },
+    ]
+  })
+}
+```
+  - **resource "aws_iam_role"**: This creates a new IAM role in AWS.
+  - **name**: Specifies the name of the IAM role, which is "S3DynamoDBFullAccessRole".
+  - **assume_role_policy**:
+    - This JSON policy defines who can assume this role.
+    - **Version**: The policy language version; "2012-10-17" is the current version.
+    - **Statement**: Contains permission statements.
+      - **Action**: Specifies the action allowed, which is "sts:AssumeRole" in this case.
+      - **Effect**: Indicates whether the statement allows or denies access, and here it allows access.
+      - **Principal**: Specifies the service that can assume this role; "ec2.amazonaws.com" allows EC2 instances to use this role.
