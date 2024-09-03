@@ -1,8 +1,8 @@
-# Setting-up-an-IAM-role-for-an-EC2-instance
+# Setting up an IAM role for an EC2 instance
 
 In this task, you will log in as the Admin user and create an IAM role. The role allows Amazon Elastic Compute Cloud (Amazon EC2) to access both Amazon Simple Storage Service (Amazon S3) and Amazon DynamoDB. You will later assign this role to an EC2 instance that hosts the employee directory application.
 
-## Setting by AWS API
+## Setting by AWS Management Console
 1. Now that you are logged in as the Admin user, use the Services search bar to search for IAM again, and open the service by choosing IAM.
 2. In the navigation pane, choose Roles.
 3. Choose Create role.
