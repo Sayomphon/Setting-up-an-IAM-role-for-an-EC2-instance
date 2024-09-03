@@ -25,5 +25,5 @@ provider "aws" {
 }
 
 ```
-  - Purpose: This block specifies the cloud service provider, which in this case is AWS.
-  - region: Defines the AWS region where the resources will be created. You can change this to any valid AWS region based on your requirements.
+  - **Purpose**: This block specifies the cloud service provider, which in this case is AWS.
+  - **region**: Defines the AWS region where the resources will be created. You can change this to any valid AWS region based on your requirements.
