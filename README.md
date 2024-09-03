@@ -56,7 +56,7 @@ resource "aws_iam_role" "s3_dynamodb_role" {
       - **Principal**: Specifies the service that can assume this role; "ec2.amazonaws.com" allows EC2 instances to use this role.
 ### 3. IAM Policy Attachments
 These blocks attach the necessary permissions to the role created above:
-  #### 3.1 S3 Policy Attachment
+#### 3.1 S3 Policy Attachment
 ```hcl
 resource "aws_iam_policy_attachment" "s3_attachment" {
   name       = "s3-attachment"
@@ -68,3 +68,16 @@ resource "aws_iam_policy_attachment" "s3_attachment" {
   - **name**: Identifier for the policy attachment.
   - **roles**: Links the policy to the created IAM role.
   - **policy_arn**: The Amazon Resource Name (ARN) for the Amazon S3 Full Access policy. This allows the role to perform any action on S3.
+#### 3.2 DynamoDB Policy Attachment
+```hcl
+resource "aws_iam_policy_attachment" "dynamodb_attachment" {
+  name       = "dynamodb-attachment"
+  roles      = [aws_iam_role.s3_dynamodb_role.name]
+  policy_arn = "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
+}
+```
+  - Similar to the S3 attachment, this block attaches the Amazon DynamoDB Full Access policy to the IAM role. It allows the role to perform any action on DynamoDB resources.
+### Additional Information
+  - **Execution**: After configuring the HCL code, run **terraform init** to initialize the working directory containing Terraform configuration files. After that, **terraform apply** will create the specified resources in AWS.
+  - **Dependencies**: Ensure that you have the appropriate AWS credentials set up in your environment, as Terraform uses these credentials to provision resources.
+  - **Clean Up**: To delete the resources created, you can simply run **terraform destroy**, which will clean up all resources defined in your Terraform scripts.
