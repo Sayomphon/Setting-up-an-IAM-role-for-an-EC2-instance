@@ -56,7 +56,7 @@ resource "aws_iam_role" "s3_dynamodb_role" {
       - **Principal**: Specifies the service that can assume this role; "ec2.amazonaws.com" allows EC2 instances to use this role.
 ### 3. IAM Policy Attachments
 These blocks attach the necessary permissions to the role created above:
-  - #### 3.1 S3 Policy Attachment
+  #### 3.1 S3 Policy Attachment
 ```hcl
 resource "aws_iam_policy_attachment" "s3_attachment" {
   name       = "s3-attachment"
