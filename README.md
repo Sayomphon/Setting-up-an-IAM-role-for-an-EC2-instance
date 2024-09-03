@@ -54,3 +54,17 @@ resource "aws_iam_role" "s3_dynamodb_role" {
       - **Action**: Specifies the action allowed, which is "sts:AssumeRole" in this case.
       - **Effect**: Indicates whether the statement allows or denies access, and here it allows access.
       - **Principal**: Specifies the service that can assume this role; "ec2.amazonaws.com" allows EC2 instances to use this role.
+### 3. IAM Policy Attachments
+These blocks attach the necessary permissions to the role created above:
+  - **S3 Policy Attachment**
+```hcl
+resource "aws_iam_policy_attachment" "s3_attachment" {
+  name       = "s3-attachment"
+  roles      = [aws_iam_role.s3_dynamodb_role.name]
+  policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+}
+```
+  - **resource "aws_iam_policy_attachment"**: This resource links IAM policies to IAM roles.
+  - **name**: Identifier for the policy attachment.
+  - **roles**: Links the policy to the created IAM role.
+  - **policy_arn**: The Amazon Resource Name (ARN) for the Amazon S3 Full Access policy. This allows the role to perform any action on S3.
